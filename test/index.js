@@ -8,28 +8,35 @@ var test       = require('tape')
 var formats = ['txt', 'csv', 'xlsx', 'xls', 'ods', 'json']
 var expected = require('./air_pollution_nl.json').rows
 var base = __dirname + require('path').sep + 'air_pollution_nl.'
+var options = [true, false]
 
 formats.forEach(function(format){
-  test(format, function(t){
-    t.plan(1)
+  options.forEach(function(bool){
+    var opts = { phpexcel: bool }
+      , prefix = bool ? 'phpexcel-stream ' : 'excel-stream '
 
-    fs.createReadStream(base + format)
-      .pipe( tabular() )
+    test(prefix + format, function(t){
+      t.plan(4)
 
-      // Ignore tiny rounding differences and 
-      // european number formatting
-      .pipe( through2(function(obj, _, next){
-        for(var k in obj) {
-          var val = obj[k], num = val.replace(',', '.')
-          if (!isNaN(num)) obj[k] = (+num).toFixed(2)
-        }
+      fs.createReadStream(base + format)
+        .pipe( tabular(opts) )
 
-        next(null, obj)
-      }))
+        // Ignore tiny rounding differences
+        .pipe( through2(function(obj, _, next){
+          for(var k in obj) {
+            if (typeof obj[k] != 'string')
+              obj[k] = obj[k].toFixed(2)
+          }
 
-      .pipe( concat(function(data){
-        // t.deepEqual(data, expected)
-        t.ok(deepEqual(data, expected), 'deep equal')
-      }))
+          next(null, obj)
+        }))
+
+        .pipe( concat(function(data){
+          t.equal(data.length, expected.length, 'length ok')
+          t.deepEqual(data[data.length-1], expected[expected.length-1], 'last row ok')
+          t.deepEqual(data[0], expected[0], 'first row ok')
+          t.ok(deepEqual(data, expected), 'deep equal')
+        }))
+    })
   })
 })

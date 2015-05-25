@@ -4,17 +4,26 @@ var peek     = require('peek-stream')
   , json     = require('JSONStream')
   , pipeline = require('stream-combiner2')
   , binary   = require('is-binary')
+  , through2 = require('through2').obj
+  , excel    = require('excel-stream')
 
 try {
-  var phpexcel = require('phpexcel-stream')
-  var spreadsheet = function() {
-    return pipeline(phpexcel(), csv())
+  var php = require('phpexcel-stream')
+  var phpexcel = function() {
+    return pipeline( php(), csv() )
   }
-} catch(e) {
-  spreadsheet = require('excel-stream')
+} catch(e) {}
+
+module.exports = function (opts) {
+  return pipeline( parse(opts), normal() )
 }
 
-module.exports = function () {
+function parse(opts) {
+  if (!opts || opts.phpexcel == null)
+    var spreadsheet = phpexcel || excel
+  else
+    spreadsheet = opts.phpexcel ? phpexcel : excel;
+
   return peek({newline: false, maxBuffer: 8000}, function (data, swap) {
     // bullet-proof nor teally
     if (binary(data.slice(0,24).toString()))
@@ -28,5 +37,22 @@ module.exports = function () {
       swap(null, csv({separator: detected.separator}))
     else
       swap(null, spreadsheet())
+  })
+}
+
+// Coerce to numbers
+function normal() {
+  return through2(function(obj, _, next){
+    for(var k in obj) {
+      var val = obj[k]
+
+      if (typeof val == 'string') {
+        // Support european format
+        var num = val.replace(',', '.')
+        if (!isNaN(num)) obj[k] = +num
+      }
+    }
+
+    next(null, obj)
   })
 }
