@@ -1,6 +1,6 @@
 {
   "name": "tabular-stream",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Detects tabular data (spreadsheets, dsv or json) and emits objects",
   "main": "index.js",
   "scripts": {
