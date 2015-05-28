@@ -9,27 +9,17 @@ environment:
     - nodejs_version: 0.10
 
 install:
-  - cinst OpenSSL.Light -y
-  - SET PATH=C:\Program Files\OpenSSL;%PATH%
   - cinst php -y
   - cd c:\tools\php
   - copy php.ini-production php.ini
   - echo date.timezone="UTC" >> php.ini
   - echo extension_dir=ext >> php.ini
-  - echo extension=php_openssl.dll >> php.ini
-  - echo extension=php_mbstring.dll >> php.ini
-  - echo extension=php_sqlite3.dll >> php.ini
-  - SET PATH=C:\tools\php;%PATH%
+  - set PATH=C:\tools\php;%PATH%
   - cd C:\tabular-stream
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
-  - npm -g install tape npm@latest
-  - set PATH=%APPDATA%\npm;%PATH%
-  - npm install --ignore-scripts
-  - cd C:\tabular-stream\node_modules\phpexcel-stream
-  - php -r "readfile('http://getcomposer.org/installer');" | php
-  - php composer.phar install --prefer-dist --no-interaction --dev
-  - cd C:\tabular-stream
+  - npm -g i tape
+  - npm install
 
 test_script:
   - node --version
