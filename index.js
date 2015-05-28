@@ -9,10 +9,13 @@ var peek     = require('peek-stream')
 
 try {
   var php = require('phpexcel-stream')
-  var phpexcel = function() {
-    return pipeline( php(), csv() )
-  }
-} catch(e) {}
+} catch(e) {
+  // Not available
+}
+
+var phpexcel = php && function() {
+  return pipeline( php(), csv() )
+}
 
 module.exports = function (opts) {
   return pipeline( parse(opts), normal() )
