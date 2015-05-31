@@ -6,14 +6,19 @@
 
 ## example
 
+`npm i tabular-stream map-tabular-keys snake-case jsonstream`
+
 ```js
-var tabular    = require('tabular-stream')
-  , fs         = require('fs')
-  , JSONStream = require('jsonstream')
+var tabular = require('tabular-stream')
+  , fs      = require('fs')
+  , keys    = require('map-tabular-keys')
+  , snake   = require('snake-case')
+  , json    = require('jsonstream')
 
 fs.createReadStream('test/air_pollution_nl.xlsx')
   .pipe( tabular() )
-  .pipe( JSONStream.stringify() )
+  .pipe( keys(snake) )
+  .pipe( json.stringify() )
   .pipe( process.stdout )
 ```
 
