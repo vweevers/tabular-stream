@@ -1,6 +1,6 @@
 # tabular-stream
 
-> **_Note_** &nbsp; The core of tabular-stream 1.0 has moved to `detect-tabular`. This is a data normalizer on top of that. You can also follow the links below and just grab the components (they are all streams).
+> Note: the core of tabular-stream 1.0 has moved to `detect-tabular`. This is now a data normalizer on top of that.
 
 **[Detects tabular data](https://www.npmjs.com/package/detect-tabular) (dsv, json, ndjson, xls, xlsx, xml, ods or sylk) and emits objects. Ensures all rows [have the same keys, optionally transforms keys](https://www.npmjs.com/package/map-tabular-keys) and tries to [coerce values to numbers](https://www.npmjs.com/package/coerce-tabular). Spreadsheets and DSV must have a header.**
 
@@ -8,7 +8,9 @@
 
 ## example
 
-`npm i tabular-stream snake-case format-data`
+```
+npm i tabular-stream snake-case format-data
+```
 
 ```js
 var tabular = require('tabular-stream')
@@ -22,13 +24,17 @@ fs.createReadStream('test/air_pollution_nl.xlsx')
   .pipe( process.stdout )
 ```
 
-> **_Tip_** &nbsp; Need a CLI doing just this? Jump to [tabular-cli](https://www.npmjs.com/package/tabular-cli), which pairs `tabular-stream` with `format-data` to convert all these formats to json, ndjson, dsv or sse. For example: `tabular -k snake-case -e tsv < input.xls > output.tsv`.
+**Need a CLI doing just this?** Jump to [tabular-cli](https://www.npmjs.com/package/tabular-cli), which pairs `tabular-stream` with `format-data` to convert tabular data to json, ndjson, dsv or sse. For example:
+
+```
+tabular -k snake-case -o tsv < input.xls > output.tsv
+```
 
 ## api
 
 ### `tabular([keys || options])`
 
-Returns a duplex stream - give it any tabular data, get back objects. `keys` is a shorthand for `{ keys: keys }`. **The available options are:**
+Returns a duplex stream - give it any tabular data, get back objects. `(keys)` is a shorthand for `({ keys: keys })`. The available options are:
 
 #### `function keys`
 
