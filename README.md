@@ -1,47 +1,57 @@
 # tabular-stream
 
-**Detects tabular data (dsv, json, ndjson, xls, xlsx, xml, ods or sylk) and emits objects. Memory efficient for spreadsheets if PHP is available (weird huh), but does not require it. Spreadsheets and DSV must have a header.**
+> **_Note_** &nbsp; The core of tabular-stream 1.0 has moved to `detect-tabular`. This is a data normalizer on top of that. You can also follow the links below and just grab the components (they are all streams).
+
+**[Detects tabular data](https://www.npmjs.com/package/detect-tabular) (dsv, json, ndjson, xls, xlsx, xml, ods or sylk) and emits objects. Ensures all rows [have the same keys, optionally transforms keys](https://www.npmjs.com/package/map-tabular-keys) and tries to [coerce values to numbers](https://www.npmjs.com/package/coerce-tabular). Spreadsheets and DSV must have a header.**
 
 [![npm status](http://img.shields.io/npm/v/tabular-stream.svg?style=flat-square)](https://www.npmjs.org/package/tabular-stream) [![Travis build status](https://img.shields.io/travis/vweevers/tabular-stream.svg?style=flat-square&label=travis)](http://travis-ci.org/vweevers/tabular-stream) [![AppVeyor build status](https://img.shields.io/appveyor/ci/vweevers/tabular-stream.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/vweevers/tabular-stream) [![Dependency status](https://img.shields.io/david/vweevers/tabular-stream.svg?style=flat-square)](https://david-dm.org/vweevers/tabular-stream)
 
 ## example
 
-`npm i tabular-stream map-tabular-keys snake-case jsonstream`
+`npm i tabular-stream snake-case format-data`
 
 ```js
 var tabular = require('tabular-stream')
   , fs      = require('fs')
-  , keys    = require('map-tabular-keys')
   , snake   = require('snake-case')
-  , json    = require('jsonstream')
+  , format  = require('format-data')
 
 fs.createReadStream('test/air_pollution_nl.xlsx')
-  .pipe( tabular() )
-  .pipe( keys(snake) )
-  .pipe( json.stringify() )
+  .pipe( tabular(snake) )
+  .pipe( format('json') )
   .pipe( process.stdout )
 ```
 
+> **_Tip_** &nbsp; Need a CLI doing just this? Jump to [tabular-cli](https://www.npmjs.com/package/tabular-cli), which pairs `tabular-stream` with `format-data` to convert all these formats to json, ndjson, dsv or sse. For example: `tabular -k snake-case -e tsv < input.xls > output.tsv`.
+
 ## api
 
-### `tabular()`
+### `tabular([keys || options])`
 
-Returns a duplex stream - give it any tabular data, get back objects.
+Returns a duplex stream - give it any tabular data, get back objects. `keys` is a shorthand for `{ keys: keys }`. **The available options are:**
 
-## supported file formats
+#### `function keys`
 
-- DSV (CSV, TSV or anything) through [csv-parser](https://npmjs.com/package/csv-parser)
-- JSON and NDJSON through [JSONStream](https://npmjs.com/package/JSONStream)
+An optional function to [transform and/or filter keys](https://www.npmjs.com/package/map-tabular-keys). Receives a single argument, for every key of the first row. Everything at [change-case](https://www.npmjs.com/package/change-case) works well. If it returns an empty string or anything other than a string, the key is ignored (i.e. not included in the emitted objects).
 
-And through [excel-stream](https://npmjs.com/package/excel-stream) or [phpexcel-stream](https://npmjs.com/package/phpexcel-stream):
+```js
+function keys(key) {
+  if (key === 'useless') return false
+  return key.toUpperCase()
+}
+```
 
-- Office Open XML (.xlsx) (Excel 2007 and above)
-- SpreadsheetML (.xml) (Excel 2003)
-- BIFF 5-8 (.xls) (Excel 95 and above)
-- Open Document Format/OASIS (.ods)
-- SYLK
+#### `mixed defaultValue`
 
-It actually supports even more formats - depending on whether excel-stream or phpexcel-stream is used - but only the shared formats are listed here.
+Fallback value to use for `null` and `undefined` values. **Default is `0`**.
+
+#### `boolean bare`
+
+Whether to emit null prototype objects via `Object.create(null)` or plain javascript objects **(the default)**.
+
+#### `boolean phpexcel`
+
+Whether to use [phpexcel-stream](https://npmjs.com/package/phpexcel-stream) (memory efficient) or [excel-stream](https://npmjs.com/package/excel-stream) (usually faster) for spreadsheets. **Default is `undefined`**, meaning it will try to require `phpexcel-stream` but if PHP is not available, fallback to `excel-stream`. This might change in the future. Hopefully someone comes up with a native, pure streaming, memory efficient spreadsheet parser.
 
 ## install
 
@@ -53,4 +63,4 @@ npm install tabular-stream
 
 ## license
 
-[MIT](http://opensource.org/licenses/MIT) © [Vincent Weevers](http://vincentweevers.nl). Inspired by [detect-data-stream](https://www.npmjs.com/package/detect-data-stream).  Test data © Statistics Netherlands, The Hague/Heerlen.
+[MIT](http://opensource.org/licenses/MIT) © [Vincent Weevers](http://vincentweevers.nl). Test data © Statistics Netherlands, The Hague/Heerlen.

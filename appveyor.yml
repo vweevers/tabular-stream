@@ -1,27 +1,20 @@
 version: "{build}"
 build: off
 shallow_clone: true
-clone_folder: c:\tabular-stream
 skip_tags: true
 
 environment:
   matrix:
-    - nodejs_version: 0.10
+    - nodejs_version: "0.10"
+    - nodejs_version: "1"
 
 install:
-  - cinst php -y
-  - cd c:\tools\php
-  - copy php.ini-production php.ini
-  - echo date.timezone="UTC" >> php.ini
-  - echo extension_dir=ext >> php.ini
-  - set PATH=C:\tools\php;%PATH%
-  - cd C:\tabular-stream
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
   - npm -g i tape
-  - npm install
+  - npm i
 
 test_script:
   - node --version
   - npm --version
-  - tape test/*.js
+  - npm test
