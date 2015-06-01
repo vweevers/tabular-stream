@@ -1,11 +1,17 @@
 {
   "name": "tabular-stream",
   "version": "2.0.0",
-  "description": "Detects and normalizes tabular data (spreadsheets, dsv or json) and emit objects",
+  "description": "Detects tabular data (spreadsheets, dsv or json) and emits normalized objects",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
   },
+  "files": [
+    "example.js",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "coerce-tabular": "~1.0.0",
     "detect-tabular": "~1.0.0",
