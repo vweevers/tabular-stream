@@ -4,7 +4,10 @@
 
 **[Detects tabular data](https://www.npmjs.com/package/detect-tabular) (spreadsheets, dsv or json, 20+ different formats) and emits objects. Ensures all rows [have the same keys, optionally transforms keys](https://www.npmjs.com/package/map-tabular-keys) and tries to [coerce values to numbers](https://www.npmjs.com/package/coerce-tabular). Spreadsheets and DSV must have a header.**
 
-[![npm status](http://img.shields.io/npm/v/tabular-stream.svg?style=flat-square)](https://www.npmjs.org/package/tabular-stream) [![Travis build status](https://img.shields.io/travis/vweevers/tabular-stream.svg?style=flat-square&label=travis)](http://travis-ci.org/vweevers/tabular-stream) [![AppVeyor build status](https://img.shields.io/appveyor/ci/vweevers/tabular-stream.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/vweevers/tabular-stream) [![Dependency status](https://img.shields.io/david/vweevers/tabular-stream.svg?style=flat-square)](https://david-dm.org/vweevers/tabular-stream)
+[![npm status](http://img.shields.io/npm/v/tabular-stream.svg)](https://www.npmjs.org/package/tabular-stream)
+[![Travis build status](https://img.shields.io/travis/vweevers/tabular-stream.svg?label=travis)](http://travis-ci.org/vweevers/tabular-stream)
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/vweevers/tabular-stream.svg?label=appveyor)](https://ci.appveyor.com/project/vweevers/tabular-stream)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## example
 
@@ -13,15 +16,15 @@ npm i tabular-stream snake-case format-data
 ```
 
 ```js
-var tabular = require('tabular-stream')
-  , fs      = require('fs')
-  , snake   = require('snake-case')
-  , format  = require('format-data')
+const tabular = require('tabular-stream')
+const fs = require('fs')
+const snake = require('snake-case')
+const format = require('format-data')
 
 fs.createReadStream('test/air_pollution_nl.xlsx')
-  .pipe( tabular(snake) )
-  .pipe( format('json') )
-  .pipe( process.stdout )
+  .pipe(tabular(snake))
+  .pipe(format('json'))
+  .pipe(process.stdout)
 ```
 
 **Need a CLI doing just this?** Jump to [tabular-cli](https://www.npmjs.com/package/tabular-cli), which pairs `tabular-stream` with `format-data` to convert tabular data to json, ndjson, dsv or sse. For example:
