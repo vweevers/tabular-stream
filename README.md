@@ -5,6 +5,7 @@
 **[Detects tabular data](https://www.npmjs.com/package/detect-tabular) (spreadsheets, dsv or json, 20+ different formats) and emits objects. Ensures all rows [have the same keys, optionally transforms keys](https://www.npmjs.com/package/map-tabular-keys) and tries to [coerce values to numbers](https://www.npmjs.com/package/coerce-tabular). Spreadsheets and DSV must have a header.**
 
 [![npm status](http://img.shields.io/npm/v/tabular-stream.svg)](https://www.npmjs.org/package/tabular-stream)
+[![node](https://img.shields.io/node/v/tabular-stream.svg)](https://www.npmjs.org/package/tabular-stream)
 [![Travis build status](https://img.shields.io/travis/vweevers/tabular-stream.svg?label=travis)](http://travis-ci.org/vweevers/tabular-stream)
 [![AppVeyor build status](https://img.shields.io/appveyor/ci/vweevers/tabular-stream.svg?label=appveyor)](https://ci.appveyor.com/project/vweevers/tabular-stream)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)

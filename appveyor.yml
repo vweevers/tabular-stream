@@ -1,20 +1,19 @@
 version: "{build}"
 build: off
-shallow_clone: true
-skip_tags: true
+skip_tags: false
 
 environment:
   matrix:
-    - nodejs_version: "0.10"
-    - nodejs_version: "1"
+    - nodejs_version: "8"
+    - nodejs_version: "10"
+    - nodejs_version: "12"
+
+platform:
+  - x64
 
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - set CI=true
-  - npm -g i tape
+  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:PLATFORM
   - npm i
 
 test_script:
-  - node --version
-  - npm --version
-  - npm test
+  - npm t

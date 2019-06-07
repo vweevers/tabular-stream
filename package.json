@@ -47,6 +47,6 @@
   "bugs": "https://github.com/vweevers/tabular-stream/issues",
   "homepage": "https://github.com/vweevers/tabular-stream",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">=8"
   }
 }
