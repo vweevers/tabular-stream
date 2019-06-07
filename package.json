@@ -1,6 +1,6 @@
 {
   "name": "tabular-stream",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Detects tabular data (spreadsheets, dsv or json) and emits normalized objects",
   "author": "Vincent Weevers",
   "license": "MIT",
