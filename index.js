@@ -2,7 +2,6 @@ var detect   = require('detect-tabular')
   , keys     = require('map-tabular-keys')
   , coerce   = require('coerce-tabular')
   , pick     = require('object.pick')
-  , xtend    = require('xtend')
   , pumpify  = require('pumpify')
   , defaults = {
     defaultValue: 0,
@@ -14,7 +13,7 @@ module.exports = function (opts) {
     opts = { keys: opts }
   }
 
-  opts = xtend(defaults, opts)
+  opts = Object.assign({}, defaults, opts)
 
   var keyOpts    = pick(opts, ['defaultValue', 'bare'])
     , detectOpts = opts
