@@ -8,7 +8,7 @@
 [![node](https://img.shields.io/node/v/tabular-stream.svg)](https://www.npmjs.org/package/tabular-stream)
 [![Travis build status](https://img.shields.io/travis/vweevers/tabular-stream.svg?label=travis)](http://travis-ci.org/vweevers/tabular-stream)
 [![AppVeyor build status](https://img.shields.io/appveyor/ci/vweevers/tabular-stream.svg?label=appveyor)](https://ci.appveyor.com/project/vweevers/tabular-stream)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Greenkeeper badge](https://badges.greenkeeper.io/vweevers/tabular-stream.svg)](https://greenkeeper.io/)
 
 ## Example
 
