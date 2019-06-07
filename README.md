@@ -2,7 +2,7 @@
 
 > Note: the core of tabular-stream 1.0 has moved to `detect-tabular`. This is now a data normalizer on top of that.
 
-**[Detects tabular data](https://www.npmjs.com/package/detect-tabular) (dsv, json, ndjson, xls, xlsx, xml, ods or sylk) and emits objects. Ensures all rows [have the same keys, optionally transforms keys](https://www.npmjs.com/package/map-tabular-keys) and tries to [coerce values to numbers](https://www.npmjs.com/package/coerce-tabular). Spreadsheets and DSV must have a header.**
+**[Detects tabular data](https://www.npmjs.com/package/detect-tabular) (spreadsheets, dsv or json, 20+ different formats) and emits objects. Ensures all rows [have the same keys, optionally transforms keys](https://www.npmjs.com/package/map-tabular-keys) and tries to [coerce values to numbers](https://www.npmjs.com/package/coerce-tabular). Spreadsheets and DSV must have a header.**
 
 [![npm status](http://img.shields.io/npm/v/tabular-stream.svg?style=flat-square)](https://www.npmjs.org/package/tabular-stream) [![Travis build status](https://img.shields.io/travis/vweevers/tabular-stream.svg?style=flat-square&label=travis)](http://travis-ci.org/vweevers/tabular-stream) [![AppVeyor build status](https://img.shields.io/appveyor/ci/vweevers/tabular-stream.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/vweevers/tabular-stream) [![Dependency status](https://img.shields.io/david/vweevers/tabular-stream.svg?style=flat-square)](https://david-dm.org/vweevers/tabular-stream)
 
@@ -55,9 +55,9 @@ Fallback value to use for `null` and `undefined` values. **Default is `0`**.
 
 Whether to emit null prototype objects via `Object.create(null)` or plain javascript objects **(the default)**.
 
-#### `boolean phpexcel`
+#### Other
 
-Whether to use [phpexcel-stream](https://npmjs.com/package/phpexcel-stream) (memory efficient) or [excel-stream](https://npmjs.com/package/excel-stream) (usually faster) for spreadsheets. **Default is `undefined`**, meaning it will try to require `phpexcel-stream` but if PHP is not available, fallback to `excel-stream`. This might change in the future. Hopefully someone comes up with a native, pure streaming, memory efficient spreadsheet parser.
+Other options are passed as-is to [`spreadsheet-stream`](https://github.com/vweevers/spreadsheet-stream) (if applicable). NB. Because the binary spreadsheets formats are not streamable, `spreadsheet-stream` will buffer the whole thing in memory. As a safe-guard you can set the `maxSize` option (in bytes): `tabular({ maxSize: 1024 * 1024 })`. See [`spreadsheet-stream`](https://github.com/vweevers/spreadsheet-stream) for details.
 
 ## install
 

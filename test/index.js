@@ -15,7 +15,7 @@ formats.forEach(function(format){
     t.plan(4)
 
     fs.createReadStream(base + format)
-      .pipe( tabular({phpexcel: false, keys: snake}) )
+      .pipe( tabular({keys: snake}) )
 
       // Ignore tiny rounding differences
       .pipe( through2(function(obj, _, next){

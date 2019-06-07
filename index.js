@@ -17,7 +17,7 @@ module.exports = function (opts) {
   opts = xtend(defaults, opts)
 
   var keyOpts    = pick(opts, ['defaultValue', 'bare'])
-    , detectOpts = pick(opts, 'phpexcel')
+    , detectOpts = opts
 
   return pipeline (
     detect(detectOpts),
