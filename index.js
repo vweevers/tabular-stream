@@ -3,7 +3,7 @@ var detect   = require('detect-tabular')
   , coerce   = require('coerce-tabular')
   , pick     = require('object.pick')
   , xtend    = require('xtend')
-  , pipeline = require('stream-combiner2')
+  , pumpify  = require('pumpify')
   , defaults = {
     defaultValue: 0,
     bare: false
@@ -19,7 +19,7 @@ module.exports = function (opts) {
   var keyOpts    = pick(opts, ['defaultValue', 'bare'])
     , detectOpts = opts
 
-  return pipeline (
+  return pumpify.obj(
     detect(detectOpts),
     keys(keyOpts, opts.keys),
     coerce()
