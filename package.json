@@ -23,7 +23,7 @@
   "devDependencies": {
     "concat-stream": "^2.0.0",
     "deep-equal": "^1.0.0",
-    "hallmark": "^0.1.0",
+    "hallmark": "^1.0.0",
     "snake-case": "^2.1.0",
     "standard": "^13.0.1",
     "tape": "^4.10.2",
