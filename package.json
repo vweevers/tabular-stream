@@ -24,7 +24,7 @@
     "concat-stream": "^2.0.0",
     "deep-equal": "^1.0.0",
     "hallmark": "^2.0.0",
-    "snake-case": "^2.1.0",
+    "snake-case": "^3.0.0",
     "standard": "^14.0.0",
     "tape": "^4.10.2",
     "through2": "^3.0.1"
