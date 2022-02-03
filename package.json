@@ -22,12 +22,12 @@
   },
   "devDependencies": {
     "concat-stream": "^2.0.0",
-    "deep-equal": "^1.0.0",
-    "hallmark": "^2.0.0",
-    "snake-case": "^2.1.0",
-    "standard": "^14.0.0",
-    "tape": "^4.10.2",
-    "through2": "^3.0.1"
+    "deep-equal": "^2.0.5",
+    "hallmark": "^4.1.0",
+    "snake-case": "^3.0.4",
+    "standard": "^16.0.4",
+    "tape": "^5.5.0",
+    "through2": "^4.0.2"
   },
   "keywords": [
     "tabular",

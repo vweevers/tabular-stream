@@ -2,7 +2,7 @@
 
 const tabular = require('.')
 const fs = require('fs')
-const snake = require('snake-case')
+const snake = require('snake-case').snakeCase
 const format = require('format-data')
 
 fs.createReadStream('test/air_pollution_nl.xlsx')

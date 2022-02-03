@@ -18,7 +18,7 @@ npm i tabular-stream snake-case format-data
 ```js
 const tabular = require('tabular-stream')
 const fs = require('fs')
-const snake = require('snake-case')
+const snake = require('snake-case').snakeCase
 const format = require('format-data')
 
 fs.createReadStream('test/air_pollution_nl.xlsx')
