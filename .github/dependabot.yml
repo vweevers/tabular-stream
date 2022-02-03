@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    ignore:
+      - dependency-name: standard
+      - dependency-name: hallmark
+      - dependency-name: tape
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

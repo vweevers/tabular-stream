@@ -6,9 +6,8 @@
 
 [![npm status](http://img.shields.io/npm/v/tabular-stream.svg)](https://www.npmjs.org/package/tabular-stream)
 [![node](https://img.shields.io/node/v/tabular-stream.svg)](https://www.npmjs.org/package/tabular-stream)
-[![Travis build status](https://img.shields.io/travis/vweevers/tabular-stream.svg?label=travis)](http://travis-ci.org/vweevers/tabular-stream)
-[![AppVeyor build status](https://img.shields.io/appveyor/ci/vweevers/tabular-stream.svg?label=appveyor)](https://ci.appveyor.com/project/vweevers/tabular-stream)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Test](https://img.shields.io/github/workflow/status/vweevers/tabular-stream/Test?label=test)](https://github.com/vweevers/tabular-stream/actions/workflows/test.yml)
+[![Standard](https://img.shields.io/badge/standard-informational?logo=javascript&logoColor=fff)](https://standardjs.com)
 
 ## Example
 
