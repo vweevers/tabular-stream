@@ -15,10 +15,10 @@
     "README.md"
   ],
   "dependencies": {
-    "coerce-tabular": "~1.0.0",
-    "detect-tabular": "~2.0.0",
-    "map-tabular-keys": "~1.0.0",
-    "pumpify": "~1.5.1"
+    "coerce-tabular": "^1.0.1",
+    "detect-tabular": "^3.0.0",
+    "map-tabular-keys": "^1.0.0",
+    "pumpify": "^2.0.1"
   },
   "devDependencies": {
     "concat-stream": "^2.0.0",
